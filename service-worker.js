@@ -1,4 +1,4 @@
-﻿import { config as unoConfig } from "/septimus/package_c0e9efe7f94584a2e79f3d83f4f84eac24433a8c/uno-config.js";
+﻿import { config as unoConfig } from "/septimus.site/package_c0e9efe7f94584a2e79f3d83f4f84eac24433a8c/uno-config.js";
 
 if (unoConfig.environmentVariables["UNO_BOOTSTRAP_DEBUGGER_ENABLED"] !== "True") {
     console.debug("[ServiceWorker] Initializing");
@@ -10,7 +10,7 @@ if (unoConfig.environmentVariables["UNO_BOOTSTRAP_DEBUGGER_ENABLED"] !== "True")
     self.addEventListener('install', function (e) {
         console.debug('[ServiceWorker] Installing offline worker');
         e.waitUntil(
-            caches.open('d5828b07-5a1a-4c90-bfeb-6b0cf5bb1640').then(async function (cache) {
+            caches.open('9cc5e3d8-88ce-4229-be55-f5e016f4b9e8').then(async function (cache) {
                 console.debug('[ServiceWorker] Caching app binaries and content');
 
                 // Add files one by one to avoid failed downloads to prevent the
@@ -35,7 +35,7 @@ if (unoConfig.environmentVariables["UNO_BOOTSTRAP_DEBUGGER_ENABLED"] !== "True")
                 try {
                     // Replace dynamic import with fetch and eval for web worker compatibility
                     // In .NET 10+, dotnet.boot.js was merged with dotnet.js for performance
-                    const response = await fetch("/septimus/_framework/dotnet.js");
+                    const response = await fetch("/septimus.site/_framework/dotnet.js");
                     if (!response.ok) {
                         throw new Error(`Failed to fetch dotnet.js: ${response.status} ${response.statusText}`);
                     }
@@ -69,7 +69,7 @@ if (unoConfig.environmentVariables["UNO_BOOTSTRAP_DEBUGGER_ENABLED"] !== "True")
                     };
 
                     for (var key in entries) {
-                        var uri = `/septimus/_framework/${key}`;
+                        var uri = `/septimus.site/_framework/${key}`;
 
                         try {
                             if (uno_enable_tracing) {
@@ -97,7 +97,7 @@ if (unoConfig.environmentVariables["UNO_BOOTSTRAP_DEBUGGER_ENABLED"] !== "True")
             caches.keys().then(function (cacheNames) {
                 return Promise.all(
                     cacheNames.filter(function (cacheName) {
-                        return cacheName !== 'd5828b07-5a1a-4c90-bfeb-6b0cf5bb1640';
+                        return cacheName !== '9cc5e3d8-88ce-4229-be55-f5e016f4b9e8';
                     }).map(function (cacheName) {
                         console.debug('[ServiceWorker] Deleting old cache:', cacheName);
                         return caches.delete(cacheName);
